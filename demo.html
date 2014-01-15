@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Avatar Uploader</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" href="avatar.css">
+	<style>
+		.avatar-upload {
+			width: 200px;
+			height: 200px;
+			border-radius: 160px;
+			overflow: hidden;
+		}
+		.avatar-upload img {
+			max-width: 200px;
+			max-height: 200px;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="avatar-upload">
+		<img src="placekitten.jpg">
+	</div>
+
+	<p><em>Click image to replace.</em></p>
+
+	<script src="avatar.js"></script>
+	<script>
+		new window.AvatarUpload({
+			el: document.querySelector('.avatar-upload'),
+			uploadUrl: '',
+			uploadData: {
+				foo: 'bar',
+				bar: 'baz'
+			},
+			pretendUpload: true
+		})
+	</script>
+
+</body>
+</html>

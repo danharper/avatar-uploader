@@ -1,0 +1,82 @@
+/*avatar upload module*/
+.avatar-upload__shell {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+/*module wrapper*/
+.avatar-upload__wrapper {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+/*input element positioned over module, transparent*/
+.avatar-upload__wrapper input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	opacity: 0;
+}
+
+/*wraps the "real" image. width is increased during upload progress*/
+.avatar-upload__image-wrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	width: 0%;
+}
+
+/*general image positioning*/
+.avatar-upload__wrapper img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+/*"real" image width auto so it doesn't resize as wrapper width increases on progress*/
+.avatar-upload__image-wrapper img {
+	width: auto;
+}
+
+/*progress text is vertically aligned in the middle*/
+.avatar-upload__progress-wrapper {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	z-index: 1;
+	width: 100%;
+	text-align: center;
+	font-size: 2.2em;
+	color: white;
+	text-shadow: 1px 1px rgba(0,0,0,.7);
+}
+
+/*the "faded" image appears in the background of the upload, becoming covered by real image*/
+.avatar-upload__faded-image {
+	opacity: .3;
+}
+
+/*when no upload is in progress, the "real" image should be fully visible*/
+.avatar-upload--complete .avatar-upload__image-wrapper {
+	width: 100%;
+}
+
+/*when no upload is in progress, progress is hidden*/
+.avatar-upload--complete .avatar-upload__progress-wrapper {
+	display: none;
+}
+
+/*when no upload is in progress, the "faded" image is hidden*/
+.avatar-upload--complete .avatar-upload__faded-image {
+	display: none;
+}

@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Avatar Uploader</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" href="avatar.css">
+	<style>
+		/*demo*/
+		.avatar-upload {
+			width: 200px;
+			height: 200px;
+		}
+		.avatar-upload img {
+			max-width: 200px;
+			max-height: 200px;
+		}
+
+		/*usage*/
+		body {
+			max-width: 800px;
+		}
+
+		.avatar-upload {
+			border-radius: 160px;
+			overflow: hidden;
+		}
+
+		#example {
+			background: #eee;
+			padding: 15px;
+			overflow: hidden;
+		}
+
+		#example .text {
+			float: left;
+			width: 50%;
+		}
+
+		#example .avatar-upload {
+			float: right;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Avatar Uploader</h1>
+
+	<div id="example">
+		<div class="text">
+			<h2>Example</h2>
+			<p>Click the image to replace it.</p>
+		</div>
+		<div class="avatar-upload">
+			<img src="placekitten.jpg">
+		</div>
+	</div>
+
+	<div id="usage">
+		<h2>Usage</h2>
+
+		<h3><span>1.</span> Include Files</h3>
+		<p>Include the <code>avatar.js</code> and <code>avatar.css</code> files in your document.</p>
+
+		<h3><span>2.</span> Wrap a Replacable Image</h3>
+		<p>Insert the current image (or a placeholder) in the page, inside a div with a custom class (eg. `avatar-upload`):</p>
+		<pre><code>&lt;div class="avatar-upload"&gt;
+    &lt;img src="placekitten.jpg"&gt;
+&lt;/div&gt;</code></pre>
+
+		<h3><span>3.</span> Set your max images widths</h3>
+		<p>You must set a max width, otherwise images will fill the container. eg.</p>
+		<pre><code>
+.avatar-upload {
+    width: 200px;
+    height: 200px;
+}
+
+.avatar-upload img {
+    max-width: 200px;
+    max-height: 200px;
+}</code></pre>
+
+		<h3><span>4.</span> Boot the module</h3>
+		<p>Now boot the module, providing it with the element containing the image to replace &amp; the URL to upload to.</p>
+		<pre><code>&lt;script&gt;
+    new AvatarUpload({
+        el: document.querySelector('.avatar-upload'),
+        uploadUrl: ''
+    });
+&lt;/script&gt;</code></pre>
+		<p>This will swap the contents of your <code>.avatar-upload</code> element with the uploader's markup. The image currently set won't appear any different. But you can now click the image to swap it out!</p>
+		<p>You can optionally provide the following configuration settings to the module:</p>
+		<ul>
+			<li><code>el</code> <strong>[required]</strong> The element containing the current replaceable image</li>
+			<li><code>uploadUrl</code> <strong>[required]</strong> Where to sent the new image to</li>
+			<li><code>uploadMethod</code> The HTTP method to use when uploading (defaults to <code>POST</code>)</li>
+			<li><code>uploadData</code> An object of additional data to send with the upload</li>
+			<li><code>onProgress</code> A function to be called continuously as the upload progresses - takes one argument, the current upload percentage completion</li>
+			<li><code>onSuccess</code> A function to be called when the upload completes successfully - takes one argument, the response from the server</li>
+			<li><code>onError</code> A function to be called when the upload fails - takes one argument, the error response from the server</li>
+			<li><code>pretentUpload</code> If <code>true</code>, no upload will be performed, it will be faked through a <code>setInterval</code>, pretending to upload - useful for testing initial set up</li>
+		</ul>
+
+	</div>
+
+	<script src="avatar.js"></script>
+	<script>
+		new window.AvatarUpload({
+			el: document.querySelector('.avatar-upload'),
+			uploadUrl: '',
+			uploadData: {
+				foo: 'bar',
+				bar: 'baz'
+			},
+			pretendUpload: true
+		})
+	</script>
+
+</body>
+</html>
