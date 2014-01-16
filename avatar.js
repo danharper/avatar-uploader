@@ -19,6 +19,15 @@
 		});
 	};
 
+	var parseJson = function(input) {
+		try {
+			return JSON.parse(input);
+		}
+		catch (e) {
+			return false;
+		}
+	};
+
 	var AvatarUpload = function(config) {
 		extend(this.config, config);
 
@@ -122,14 +131,14 @@
 		if (this.config.onProgress) this.config.onProgress(progress, this.el, this);
 	};
 
-	AvatarUpload.prototype.uploadSuccess = function(data) {
-		this.uiUploadSuccess(data);
-		if (this.config.onSuccess) this.config.onSuccess(data);
+	AvatarUpload.prototype.uploadSuccess = function(xhr, json) {
+		this.uiUploadSuccess(xhr, json);
+		if (this.config.onSuccess) this.config.onSuccess(xhr, json);
 	};
 
-	AvatarUpload.prototype.uploadError = function(data) {
-		this.uiUploadError(data);
-		if (this.config.onError) this.config.onError(data);
+	AvatarUpload.prototype.uploadError = function(xhr, json) {
+		this.uiUploadError(xhr, json);
+		if (this.config.onError) this.config.onError(xhr, json);
 	};
 
 	AvatarUpload.prototype.uiUploadStart = function(img) {
@@ -150,13 +159,13 @@
 		this.imageWrapper.style.width = progress+'%';
 	};
 
-	AvatarUpload.prototype.uiUploadSuccess = function() {
+	AvatarUpload.prototype.uiUploadSuccess = function(xhr, json) {
 		this.progressText.textContent = '0%';
 		this.imageWrapper.style.width = null;
 		this.el.querySelector('.avatar-upload__wrapper').className = 'avatar-upload__wrapper avatar-upload--complete';
 	};
 
-	AvatarUpload.prototype.uiUploadError = function(data) {
+	AvatarUpload.prototype.uiUploadError = function(xhr, json) {
 		this.uiUploadSuccess();
 
 		var origSrc = this.origSrc;
@@ -195,10 +204,10 @@
 			if (xhr.readyState !== 4) return;
 
 			if (xhr.status === 200) {
-				callbacks.success();
+				callbacks.success(xhr, parseJson(xhr.response));
 			}
 			else {
-				callbacks.error();
+				callbacks.error(xhr, parseJson(xhr.response));
 			}
 		};
 
