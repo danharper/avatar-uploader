@@ -95,18 +95,22 @@
 
 		// read file & run upload
 		var reader = new FileReader;
-		reader.onload = this.upload.bind(this);
+		reader.onload = this.displayUpload.bind(this);
 		reader.readAsDataURL(file);
+
+		this.upload(file);
 	};
 
-	AvatarUpload.prototype.upload = function(event) {
+	AvatarUpload.prototype.displayUpload = function(event) {
 		var img = event.target.result;
 
 		this.uiUploadStart(img);
+	};
 
+	AvatarUpload.prototype.upload = function(file) {
 		var Uploader = this.config.pretendUpload ? FakeUploader : XhrUploader;
 
-		Uploader(img, this.config, {
+		Uploader(file, this.config, {
 			progress: this.uploadProgress.bind(this),
 			success: this.uploadSuccess.bind(this),
 			error: this.uploadError.bind(this),
