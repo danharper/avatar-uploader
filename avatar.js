@@ -119,7 +119,7 @@
 
 	AvatarUpload.prototype.uploadProgress = function(progress) {
 		this.uiUploadProgress(progress);
-		if (this.config.onProgress) this.config.onProgress(progress);
+		if (this.config.onProgress) this.config.onProgress(progress, this.el, this);
 	};
 
 	AvatarUpload.prototype.uploadSuccess = function(data) {
