@@ -82,7 +82,7 @@
 			'</div>',
 		].join('');
 
-		imgEl.remove();
+		imgEl.parentNode.removeChild(imgEl);
 		this.el.appendChild(el);
 
 		return this;
